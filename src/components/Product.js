@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import * as msg from './../constant/Message.js'
 
 class Product extends Component {
       render(){
@@ -29,9 +29,14 @@ class Product extends Component {
                                 {product.description}
                         </p>
                         <div className="card-footer">
-                            <span className="left">15$</span>
+                            <span className="left">{product.price}$</span>
                             <span className="right">
-                                <a href = "localhost:3000" className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart">
+                                <a href = "localhost:3000" 
+                                className="btn-floating blue-gradient" 
+                                data-toggle="tooltip" data-placement="top" title="" 
+                                data-original-title="Add to Cart"
+                                onClick = { () =>this.onAddToCart(product)}
+                                >
                                     <i className="fa fa-shopping-cart"></i>
                                 </a>
                             </span>
@@ -41,17 +46,20 @@ class Product extends Component {
             </div>
         );
     }
+    onAddToCart = (product) =>{
+            this.props.onAddToCart(product)
+            this.props.onChangeMsg(msg.MSG_ADD_TO_CART_SUCCESS)
+        }
     showRating(rating){
         var result = [];
         for(var i = 0 ; i< rating ; i++)
         {
-            result.push(<i className="fa fa-star"></i>)
+            result.push(<i key={i} className="fa fa-star"></i>)
         }
-        for(var i =rating ; i< 5 ; i++)
+        for(i = rating ; i< 5 ; i++)
         {
-            result.push(<i className="fa fa-star-o"></i>)
+            result.push(<i key={i} className="fa fa-star-o"></i>)
         }
-
         return result;
     }
 }
