@@ -7,7 +7,8 @@ import CartItem from './../components/CartItem'
 import CartResults from './../components/CartResults.js'
 import {actChangeMessage, actDeleteProductOnCart, 
   actIncreaseAmountProductOnCart,
-  actDecreaseAmountProductOnCart} from './../actions/index.js'
+  actDecreaseAmountProductOnCart,
+  actBuyProduct} from './../actions/index.js'
 
 
 class CartContainer extends Component {
@@ -18,6 +19,7 @@ class CartContainer extends Component {
             <Cart>
                 {this.showCartItem(carts)}
                 {this.showTotalAmount(carts)}
+
             </Cart>
         );
     }
@@ -46,7 +48,10 @@ class CartContainer extends Component {
       var result = null;
       if(carts.length > 0)
       {
-          result = <CartResults carts = {carts} />
+          result = <CartResults carts = {carts}  onBuy = {this.props.onBuy}
+          onChangeMsg = {this.props.onChangeMsg}
+           />
+          
       }
       return result
     }
@@ -90,6 +95,9 @@ const mapDispatchToProps = (dispatch, props) =>{
       },
       onDecreaseAmountproduct: (product) =>{
         dispatch(actDecreaseAmountProductOnCart(product))
+      },
+      onBuy: (carts)=>{
+        dispatch(actBuyProduct(carts))
       }
   })
 }

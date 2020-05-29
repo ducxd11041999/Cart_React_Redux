@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import * as msg from './../constant/Message.js'
 class CartResults extends Component {
 
     showToatalAmount =(carts)=>{
@@ -27,12 +27,19 @@ class CartResults extends Component {
                     </h4>
                 </td>
                 <td colSpan="3">
-                    <button type="button" className="btn btn-primary waves-effect waves-light">Complete purchase
+                    <button type="button" className="btn btn-primary waves-effect waves-light"
+                        onClick = {() => this.onBuy(carts)}
+                    >Complete purchase
                         <i className="fa fa-angle-right right"></i>
                     </button>
                 </td>
             </tr>
         );
+    }
+
+    onBuy = (carts) =>{
+        this.props.onBuy(carts);
+        this.props.onChangeMsg( carts != ''? msg.MSG_BUY_SUCCESS : "Mua hàng không thành công");
     }
 }
 

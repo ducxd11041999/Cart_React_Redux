@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import Message from './../components/Message.js'
 class MessageContainer extends Component {
     render(){
@@ -11,11 +11,11 @@ class MessageContainer extends Component {
         );
     }
 }
-
+/*
 MessageContainer.propTypes = { msg: PropTypes.arrayOf(
     PropTypes.string.isRequired
     ).isRequired }
-
+*/
 const mapStateToProps = (state) =>
 {
     return{

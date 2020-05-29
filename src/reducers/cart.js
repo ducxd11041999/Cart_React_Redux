@@ -1,5 +1,7 @@
 import * as type from './../constant/ActionsType.js'
+import {actChangeMessage} from './../actions/index.js'
 var data = JSON.parse(localStorage.getItem('CART'));
+
 var initialState = data ? data : '';
 	
 const carts = (state = initialState, action) =>{
@@ -54,6 +56,28 @@ const carts = (state = initialState, action) =>{
 				}
 			}
 			localStorage.setItem('CART', JSON.stringify(state))
+			return [...state]
+		case type.BUY:
+		
+			if(action.carts)
+			{
+				for(var i = 0 ; i < action.carts.length ; i++)
+				{
+					if(action.carts[i].product.iventory >= action.carts[i].quantity)
+						{
+							action.carts[i].product.iventory -= action.carts[i].quantity
+							console.log(action.carts[i].product.iventory)
+						}
+					else{
+						alert("Sản phẩm " + action.carts[i].product.name + " không đủ số lượng")
+						return '';
+						
+					}
+				}
+				alert("Mua thành công")
+				localStorage.setItem('CART', JSON.stringify(state))
+			}
+			
 			return [...state]
 		default:
 			return [...state]

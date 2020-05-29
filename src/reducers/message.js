@@ -7,7 +7,7 @@ const messages = (state = initialState, action) =>{
 	{
 
 		case type.CHANGE_MSG:
-			console.log(action.message)
+			//console.log(action.message)
 			return action.message
 		default:
 			return [...state];

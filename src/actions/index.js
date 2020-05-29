@@ -34,3 +34,9 @@ export const actDecreaseAmountProductOnCart = (product) =>{
 		product
 	}
 }
+export const actBuyProduct = (carts) =>{
+		return {
+			type : type.BUY,
+			carts
+		}
+}
