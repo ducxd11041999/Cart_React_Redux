@@ -5,6 +5,11 @@ import Cart from './../components/Cart.js'
 import * as mess from './../constant/Message.js'
 import CartItem from './../components/CartItem'
 import CartResults from './../components/CartResults.js'
+import {actChangeMessage, actDeleteProductOnCart, 
+  actIncreaseAmountProductOnCart,
+  actDecreaseAmountProductOnCart} from './../actions/index.js'
+
+
 class CartContainer extends Component {
     render(){
       var {carts} = this.props;
@@ -26,6 +31,10 @@ class CartContainer extends Component {
                   <CartItem
                       key = {index} 
                       cart = {cart}
+                      onDeleteCart = {this.props.onDeleteCart}
+                      onChangeMsg = {this.props.onChangeMsg}
+                      onIncreaseAmountproduct = {this.props.onIncreaseAmountproduct}
+                      onDecreaseAmountproduct = {this.props.onDecreaseAmountproduct}
                   />
               )
           })
@@ -55,7 +64,11 @@ CartContainer.propTypes = {
       }).isRequired,
       quantity: PropTypes.number.isRequired
     })
-    ).isRequired
+    ).isRequired,
+  onDeleteCart: PropTypes.func.isRequired,
+  onChangeMsg: PropTypes.func.isRequired,
+  onDecreaseAmountproduct: PropTypes.func.isRequired,
+  onIncreaseAmountproduct: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) =>
@@ -64,5 +77,21 @@ const mapStateToProps = (state) =>
       carts: state.carts
     })
 }
+const mapDispatchToProps = (dispatch, props) =>{
+  return({
+      onDeleteCart : (product) => {
+        dispatch(actDeleteProductOnCart(product))
+      }, 
+      onChangeMsg: (msg) =>{
+        dispatch(actChangeMessage(msg));
+      },
+      onIncreaseAmountproduct: (product) =>{
+        dispatch(actIncreaseAmountProductOnCart(product))
+      },
+      onDecreaseAmountproduct: (product) =>{
+        dispatch(actDecreaseAmountProductOnCart(product))
+      }
+  })
+}
 
-export default connect(mapStateToProps, null)(CartContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);

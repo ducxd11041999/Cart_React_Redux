@@ -15,3 +15,22 @@ export const actChangeMessage = (message) =>{
 		message
 	}
 }
+
+export const actDeleteProductOnCart = (product) =>{
+	return{
+		type : type.DELETE_PRODUCT_ON_CART,
+		product
+	}
+}
+export const actIncreaseAmountProductOnCart = (product) =>{
+	return{
+		type: type.INCREASE_AMOUNT_PRODUCT_ON_CART, 
+		product
+	}
+}
+export const actDecreaseAmountProductOnCart = (product) =>{
+	return{
+		type: type.DECREASE_AMOUNT_PRODUCT_ON_CART, 
+		product
+	}
+}
